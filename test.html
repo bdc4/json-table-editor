@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>JSON Table Editor</title>
+
+    <!-- placeholders for the theme switcher -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" id='icon_stylesheet' href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+
+    <style>[class*="foundicon-"] {font-family: GeneralFoundicons;font-style: normal;}</style>
+    <script src="dist/jsoneditor.js"></script>
+</head>
+<body>
+<div class='container'>
+  <div class='row'>
+    <div class='span12 col-md-12'>
+      <h2>Table Editor</h2>
+      <p>A tool for creating/editing tables and exporting them as JSON</p>
+      <div id='editor_holder'></div>
+    </div>
+  </div>
+  <!--div class='row'>
+    <div class='span12 col-md-12'>
+      <div> <a href='#' id='direct_link'>Direct Link</a> (preserves schema, value, and options) </div>
+      <h2>JSON Output</h2>
+      <textarea id='output' style='width: 100%; height: 300px; font-family: monospace;' class='form-control'></textarea>
+      <h2>Validation</h2>
+      <p>This will update whenever the form changes to show validation errors if there are any.</p>
+      <textarea id='validate' style='width: 100%; height: 100px; font-family: monospace;' readonly disabled class='form-control'></textarea>
+    </div>
+  </div-->
+</div>
+
+<script>
+
+// Initialize the editor
+var editor = new JSONEditor(document.getElementById("editor_holder"), {
+    ajax: true,
+	theme: "bootstrap3",
+    schema: {
+        type: "array",
+        title: "Daily Events Table",
+        format: "tabs",
+        items: {
+            title: "Table",
+            headerTemplate: "{{self.name}}",
+            type: "object",
+            properties: {
+                name: {
+                    type: "string"
+                },
+                events: {
+                    type: "array",
+                    items: {
+                        $ref: "#/definitions/event"
+                    }
+                }
+            }
+
+        },
+        definitions: {
+            event: {
+                type: "object",
+                headerTemplate: "{{self.name}}",
+                properties: {
+                    name: {
+                        type: "string"
+                    },
+                    text: {
+                        type: "string"
+                    },
+                    actions: {
+                        type: "array"
+                    }
+                }
+            }
+        }
+    }
+
+
+});
+console.log(editor);
+</script>
+</body>
+</html>
