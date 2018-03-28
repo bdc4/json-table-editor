@@ -558,7 +558,7 @@ JSONEditor.prototype = {
     }
     
     for(var i in schema) {
-      if(!schema.hasOwnProperty(i)) continue;
+      if(!schema.hasOwnProperty(i)) {continue;}
       if(schema[i] && typeof schema[i] === "object" && Array.isArray(schema[i])) {
         for(var j=0; j<schema[i].length; j++) {
           if(typeof schema[i][j]==="object") {
